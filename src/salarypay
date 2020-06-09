@@ -1,0 +1,55 @@
+String sql = "Insert into employee(eid,name,email,pan,password,doteofjoining,jobtitle,department"
+				+ ",address,annualctc,accountnumber) " + "values(?,?,?,?,?,?,?,?,?,?,?)";
+
+String sql = "select * from employee where email=? and password=?";
+String sql = "select * from employee";
+String sql = "Update employee set annualctc=?  where eid=?";
+String sql1 = "Select annualctc  from employee where eid=?";
+String sql = "Update salarycalculation set salary=? where sid=?";
+String query = "Select * from employee where eid=?";
+String query = "Select * from salarycalculation where sid='" + id + "'";
+String sql2 = "UPDATE attendence SET STATUS = 'PRESENT' WHERE EID = " + "'" + id.trim() + "'";
+String sql = "Select * from attendence";
+String query = "Select * from employee where eid=?";
+		
+		
+create table managerlogin(
+mid varchar(10) not null,
+email varchar(20) not null,
+name varchar(50) not null,
+phonenumber number(20) not null,
+password varchar(20) not null,
+confirmpassword varchar(20) not null,
+Signupdate date, 
+CONSTRAINT manager_pk PRIMARY KEY(mid)
+);
+
+create table employee(
+eid varchar(10) not null,
+name varchar(20) not null,
+email varchar(20) not null,
+pan varchar(15) not null,
+password varchar(20) not null,
+DoteOfJoining date,
+JobTitle varchar(20) not null,
+Department varchar(20) not null,
+Address varchar(45) not null,
+AnnualCTC number(25) not null,
+AccountNumber number(20) not null,
+CONSTRAINT employee_pk PRIMARY KEY(eid)
+);
+
+create table salarycalculation(
+sid varchar(15) not null primary key,
+eid varchar(10) not null,
+salary number(25),
+foreign key(eid) references employee(eid)
+);
+
+create table attendence(
+id number(10) not null primary key,
+eid varchar(10) not null,
+status varchar(10) default 'Absent',
+CONSTRAINT attendence_fk foreign key(eid) references employee(eid)
+);
+
